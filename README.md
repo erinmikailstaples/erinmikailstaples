@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2025-10-20 19:44 UTC*
+*Last updated: 2025-10-20 19:48 UTC*
 
 - [AI needs APIs](https://www.erinmikailstaples.com/ai-needs-apis/) — Aug 20, 2025
 - [The blog outline that beats all other blog outlines (for me).](https://www.erinmikailstaples.com/the-blog-outline-that-beats-all-other-blog-outlines/) — Jan 04, 2024
@@ -42,32 +42,18 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <!-- DYNAMIC:START:stats -->
 ## 📊 GitHub Activity
 
-### 🚀 This Year's Contributions
-```
-Total Commits: 595
-```
+**🚀 596 commits this year**
 
-### 💻 Top Languages
-| Language | Usage | Chart |
-|----------|-------|-------|
-| Python | 48% | `█████████░░░░░░░░░░░` |
-| MDX | 18% | `███░░░░░░░░░░░░░░░░░` |
-| TypeScript | 16% | `███░░░░░░░░░░░░░░░░░` |
-| JavaScript | 7% | `█░░░░░░░░░░░░░░░░░░░` |
-| CSS | 7% | `█░░░░░░░░░░░░░░░░░░░` |
-| Handlebars | 3% | `░░░░░░░░░░░░░░░░░░░░` |
+### 💻 Programming Languages
+![Languages Chart](./languages_chart.png)
 
-### 📈 Most Active Repositories
-| Repository | Commits | Stars | Activity |
-|------------|---------|-------|----------|
-| [rungalileo/sdk-examples](https://github.com/rungalileo/sdk-examples) | 107 | ⭐ 12 | 🔥 Very Active |
-| [rungalileo/space-speed](https://github.com/rungalileo/space-speed) | 79 | ⭐ 1 | 🔥 Very Active |
-| [rungalileo/docs-official](https://github.com/rungalileo/docs-official) | 73 | ⭐ 4 | 🔥 Very Active |
-| [erinmikailstaples/blogblogblog](https://github.com/erinmikailstaples/blogblogblog) | 44 | ⭐ 2 | ⚡ Active |
-| [elviskahoro/codetv](https://github.com/elviskahoro/codetv) | 27 | — | ⚡ Active |
-| [erinmikailstaples/AstroTurf](https://github.com/erinmikailstaples/AstroTurf) | 12 | ⭐ 1 | 📝 Regular |
-| [erinmikailstaples/ghost-tools](https://github.com/erinmikailstaples/ghost-tools) | 12 | ⭐ 1 | 📝 Regular |
-| [rungalileo/proj-talkback](https://github.com/rungalileo/proj-talkback) | 12 | — | 📝 Regular |
+### 📈 Active Repositories
+- 🔥 [sdk-examples](https://github.com/rungalileo/sdk-examples) - 107 commits (12⭐)
+- 🔥 [space-speed](https://github.com/rungalileo/space-speed) - 79 commits (1⭐)
+- 🔥 [docs-official](https://github.com/rungalileo/docs-official) - 73 commits (4⭐)
+- ⚡ [blogblogblog](https://github.com/erinmikailstaples/blogblogblog) - 44 commits (2⭐)
+- ⚡ [codetv](https://github.com/elviskahoro/codetv) - 27 commits
+- 📝 [ghost-tools](https://github.com/erinmikailstaples/ghost-tools) - 12 commits (1⭐)
 
 <!-- DYNAMIC:END:stats -->
 

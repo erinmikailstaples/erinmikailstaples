@@ -343,75 +343,108 @@ def render_blog_block(posts, date_format="%b %d, %Y"):
                 lines.append(f"- [{p['title']}]({p['link']})")
     return "\n".join(lines) + "\n"
 
-def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositories=8):
+def generate_language_chart(languages, filename="languages_chart.png"):
+    """Generate a pie chart for language usage"""
+    try:
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+        
+        # Prepare data
+        labels = []
+        sizes = []
+        colors = ['#3776ab', '#e34c26', '#f1e05a', '#563d7c', '#2b7489', '#f1502f']
+        
+        for i, (name, pct) in enumerate(languages[:6]):
+            labels.append(f"{name}\n{pct}%")
+            sizes.append(pct)
+        
+        # Create figure with dark theme
+        plt.style.use('dark_background')
+        fig, ax = plt.subplots(figsize=(8, 6))
+        
+        # Create pie chart
+        wedges, texts, autotexts = ax.pie(sizes, labels=labels, colors=colors[:len(sizes)], 
+                                         autopct='', startangle=90,
+                                         textprops={'fontsize': 10, 'weight': 'bold'})
+        
+        # Style the chart
+        ax.set_title('Programming Languages Usage', fontsize=16, weight='bold', pad=20)
+        
+        # Equal aspect ratio ensures that pie is drawn as a circle
+        ax.axis('equal')
+        
+        # Save the chart
+        plt.tight_layout()
+        plt.savefig(filename, dpi=150, bbox_inches='tight', facecolor='#0d1117', edgecolor='none')
+        plt.close()
+        
+        return True
+    except ImportError:
+        return False
+    except Exception as e:
+        print(f"Chart generation failed: {e}")
+        return False
+
+def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositories=6):
     lines = []
     lines.append("## 📊 GitHub Activity")
     lines.append("")
     
-    # Commits section with visual indicator
+    # Commits section - more compact
     total_commits = stats.get('total_commits_year', 0)
     rc = stats.get("restricted_commits_year", 0) or 0
     
-    lines.append("### 🚀 This Year's Contributions")
-    lines.append(f"```")
-    lines.append(f"Total Commits: {total_commits}")
+    commits_text = f"**🚀 {total_commits} commits this year**"
     if rc > 0:
-        lines.append(f"Private Repos: +{rc}")
-    lines.append(f"```")
+        commits_text += f" *(+{rc} private)*"
+    lines.append(commits_text)
     lines.append("")
 
-    # Languages section with progress bars
+    # Languages section with chart
     langs = stats.get("languages", [])
     if langs:
-        lines.append("### 💻 Top Languages")
-        lines.append("| Language | Usage | Chart |")
-        lines.append("|----------|-------|-------|")
+        # Try to generate chart
+        chart_generated = generate_language_chart(langs[:max_languages])
         
-        top = langs[:max_languages]
-        for name, pct in top:
-            # Create a visual bar using Unicode blocks
-            bar_length = 20
-            filled = int((pct / 100) * bar_length)
-            empty = bar_length - filled
-            bar = "█" * filled + "░" * empty
-            lines.append(f"| {name} | {pct}% | `{bar}` |")
-        lines.append("")
+        if chart_generated:
+            lines.append("### 💻 Programming Languages")
+            lines.append("![Languages Chart](./languages_chart.png)")
+            lines.append("")
+        else:
+            # Fallback to compact text format
+            lines.append("### 💻 Languages")
+            lang_items = [f"{name} ({pct}%)" for name, pct in langs[:max_languages]]
+            lines.append(" • ".join(lang_items))
+            lines.append("")
 
-    # Frameworks section with emoji badges
+    # Frameworks section - more compact
     frames = stats.get("frameworks", [])
     if frames:
-        lines.append("### 🛠️ Frameworks & Tools")
-        frame_badges = []
-        for frame in frames[:max_frameworks]:
-            frame_badges.append(f"`{frame}`")
-        lines.append(" ".join(frame_badges))
+        lines.append("**🛠️ Frameworks:** " + " • ".join(frames[:max_frameworks]))
         lines.append("")
 
-    # Repositories section with better table format
+    # Repositories section - compact table
     repos = stats.get("repositories", [])
     if repos:
-        lines.append("### 📈 Most Active Repositories")
-        lines.append("| Repository | Commits | Stars | Activity |")
-        lines.append("|------------|---------|-------|----------|")
+        lines.append("### 📈 Active Repositories")
         
         top_repos = repos[:max_repositories]
         for repo in top_repos:
-            repo_name = repo["name"]
+            repo_name = repo["name"].split('/')[-1]  # Just repo name, not full path
             commits = repo["commits"]
             stars = repo["stars"]
+            full_name = repo["name"]
             
             # Create activity indicator
             if commits >= 50:
-                activity = "🔥 Very Active"
+                activity = "🔥"
             elif commits >= 20:
-                activity = "⚡ Active"
-            elif commits >= 10:
-                activity = "📝 Regular"
+                activity = "⚡"
             else:
-                activity = "💡 Contributing"
+                activity = "📝"
             
-            star_display = f"⭐ {stars}" if stars > 0 else "—"
-            lines.append(f"| [{repo_name}](https://github.com/{repo_name}) | {commits} | {star_display} | {activity} |")
+            star_text = f" ({stars}⭐)" if stars > 0 else ""
+            lines.append(f"- {activity} [{repo_name}](https://github.com/{full_name}) - {commits} commits{star_text}")
         lines.append("")
 
     return "\n".join(lines) + "\n"

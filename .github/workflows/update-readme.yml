@@ -41,8 +41,11 @@ jobs:
       - name: Install Python
         run: uv python install 3.12
 
+      - name: Install dependencies
+        run: uv pip install --system python-dotenv matplotlib
+
       - name: Update README
-        run: uv run python scripts/update_readme.py
+        run: python scripts/update_readme.py
         env:
           # Use GH_PAT if available for private contributions, otherwise fallback to github.token
           GITHUB_TOKEN: ${{ secrets.GH_PAT || github.token }}
@@ -53,7 +56,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
           # Add files that might have changed
-          git add README.md .github/.state/state.json || true
+          git add README.md .github/.state/state.json languages_chart.png || true
           
           # Check if there are any changes to commit
           if git diff --cached --quiet; then
