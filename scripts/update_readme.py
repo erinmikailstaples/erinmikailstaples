@@ -344,7 +344,7 @@ def render_blog_block(posts, date_format="%b %d, %Y"):
     return "\n".join(lines) + "\n"
 
 def generate_language_chart(languages, filename="languages_chart.png"):
-    """Generate a pie chart for language usage"""
+    """Generate a smaller pie chart for language usage"""
     try:
         import matplotlib.pyplot as plt
         import matplotlib.patches as mpatches
@@ -358,24 +358,24 @@ def generate_language_chart(languages, filename="languages_chart.png"):
             labels.append(f"{name}\n{pct}%")
             sizes.append(pct)
         
-        # Create figure with dark theme
+        # Create figure with dark theme - SMALLER SIZE
         plt.style.use('dark_background')
-        fig, ax = plt.subplots(figsize=(8, 6))
+        fig, ax = plt.subplots(figsize=(6, 4))  # Reduced from 8x6
         
         # Create pie chart
         wedges, texts, autotexts = ax.pie(sizes, labels=labels, colors=colors[:len(sizes)], 
                                          autopct='', startangle=90,
-                                         textprops={'fontsize': 10, 'weight': 'bold'})
+                                         textprops={'fontsize': 9, 'weight': 'bold'})  # Smaller font
         
         # Style the chart
-        ax.set_title('Programming Languages Usage', fontsize=16, weight='bold', pad=20)
+        ax.set_title('Programming Languages', fontsize=14, weight='bold', pad=15)  # Smaller title
         
         # Equal aspect ratio ensures that pie is drawn as a circle
         ax.axis('equal')
         
         # Save the chart
         plt.tight_layout()
-        plt.savefig(filename, dpi=150, bbox_inches='tight', facecolor='#0d1117', edgecolor='none')
+        plt.savefig(filename, dpi=120, bbox_inches='tight', facecolor='#0d1117', edgecolor='none')  # Lower DPI
         plt.close()
         
         return True
@@ -385,12 +385,113 @@ def generate_language_chart(languages, filename="languages_chart.png"):
         print(f"Chart generation failed: {e}")
         return False
 
-def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositories=6):
+def analyze_commit_messages(login, token):
+    """Analyze commit messages for fun statistics"""
+    try:
+        import re
+        from collections import Counter, defaultdict
+        
+        # Get recent commits from multiple repositories
+        query = """
+        query($login: String!) {
+          user(login: $login) {
+            repositories(first: 50, orderBy: {field: PUSHED_AT, direction: DESC}, ownerAffiliations: OWNER) {
+              nodes {
+                defaultBranchRef {
+                  target {
+                    ... on Commit {
+                      history(first: 100) {
+                        nodes {
+                          message
+                          committedDate
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        """
+        
+        variables = {"login": login}
+        data = gh_graphql(query, variables, token)
+        
+        commits = []
+        for repo in data["user"]["repositories"]["nodes"]:
+            if repo.get("defaultBranchRef") and repo["defaultBranchRef"].get("target"):
+                history = repo["defaultBranchRef"]["target"].get("history", {}).get("nodes", [])
+                for commit in history:
+                    commits.append({
+                        'message': commit.get('message', ''),
+                        'date': commit.get('committedDate', '')
+                    })
+        
+        if not commits:
+            return None
+            
+        # Analyze commit messages
+        all_words = []
+        oops_count = 0
+        commits_by_minute = defaultdict(int)
+        
+        oops_keywords = ['oops', 'plz work', 'please work', 'dammit', 'fix']
+        
+        for commit in commits:
+            message = commit['message'].lower()
+            
+            # Extract words (remove common prefixes and punctuation)
+            words = re.findall(r'\b\w{3,}\b', message)
+            words = [w for w in words if w not in ['add', 'update', 'fix', 'remove', 'the', 'and', 'for', 'with']]
+            all_words.extend(words)
+            
+            # Check for "oops" keywords
+            for keyword in oops_keywords:
+                if keyword in message:
+                    oops_count += 1
+                    break
+            
+            # Count commits per minute
+            if commit['date']:
+                try:
+                    # Extract minute from timestamp
+                    minute = commit['date'][:16]  # YYYY-MM-DDTHH:MM
+                    commits_by_minute[minute] += 1
+                except:
+                    pass
+        
+        # Get most common word
+        word_counts = Counter(all_words)
+        most_common_word = word_counts.most_common(1)[0] if word_counts else ('code', 0)
+        
+        # Get max commits in one minute
+        max_commits_per_minute = max(commits_by_minute.values()) if commits_by_minute else 0
+        
+        # Create oops-o-meter visual (out of 20)
+        oops_percentage = min(100, (oops_count / len(commits)) * 100) if commits else 0
+        oops_bar_length = 20
+        oops_filled = int((oops_percentage / 100) * oops_bar_length)
+        oops_empty = oops_bar_length - oops_filled
+        oops_bar = "█" * oops_filled + "░" * oops_empty
+        
+        return {
+            'most_common_word': most_common_word[0],
+            'max_commits_per_minute': max_commits_per_minute,
+            'oops_count': oops_count,
+            'oops_bar': oops_bar
+        }
+        
+    except Exception as e:
+        print(f"Commit analysis failed: {e}")
+        return None
+
+def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositories=8):
     lines = []
     lines.append("## 📊 GitHub Activity")
     lines.append("")
     
-    # Commits section - more compact
+    # Commits section with fun facts
     total_commits = stats.get('total_commits_year', 0)
     rc = stats.get("restricted_commits_year", 0) or 0
     
@@ -398,17 +499,28 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
     if rc > 0:
         commits_text += f" *(+{rc} private)*"
     lines.append(commits_text)
+    
+    # Add fun commit facts
+    commit_stats = stats.get('commit_analysis')
+    if commit_stats:
+        lines.append(f"- Most used commit word: **{commit_stats['most_common_word']}**")
+        lines.append(f"- 💩 Most commits in 1 minute: **{commit_stats['max_commits_per_minute']}**")
+        lines.append(f"- Oops-o-meter: `{commit_stats['oops_bar']}` **{commit_stats['oops_count']}**")
     lines.append("")
 
-    # Languages section with chart
+    # Languages section with smaller chart
     langs = stats.get("languages", [])
     if langs:
         # Try to generate chart
         chart_generated = generate_language_chart(langs[:max_languages])
         
         if chart_generated:
+            lines.append("<div align='center'>")
+            lines.append("")
             lines.append("### 💻 Programming Languages")
             lines.append("![Languages Chart](./languages_chart.png)")
+            lines.append("")
+            lines.append("</div>")
             lines.append("")
         else:
             # Fallback to compact text format
@@ -423,19 +535,26 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
         lines.append("**🛠️ Frameworks:** " + " • ".join(frames[:max_frameworks]))
         lines.append("")
 
-    # Repositories section - compact table
+    # Repositories section - TWO COLUMNS
     repos = stats.get("repositories", [])
     if repos:
         lines.append("### 📈 Active Repositories")
+        lines.append("")
+        
+        # Create two-column layout using HTML table
+        lines.append("<table><tr><td valign='top' width='50%'>")
+        lines.append("")
         
         top_repos = repos[:max_repositories]
-        for repo in top_repos:
-            repo_name = repo["name"].split('/')[-1]  # Just repo name, not full path
+        half = len(top_repos) // 2 + len(top_repos) % 2
+        
+        # First column
+        for i, repo in enumerate(top_repos[:half]):
+            repo_name = repo["name"].split('/')[-1]
             commits = repo["commits"]
             stars = repo["stars"]
             full_name = repo["name"]
             
-            # Create activity indicator
             if commits >= 50:
                 activity = "🔥"
             elif commits >= 20:
@@ -444,7 +563,31 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
                 activity = "📝"
             
             star_text = f" ({stars}⭐)" if stars > 0 else ""
-            lines.append(f"- {activity} [{repo_name}](https://github.com/{full_name}) - {commits} commits{star_text}")
+            lines.append(f"- {activity} [{repo_name}](https://github.com/{full_name}) - {commits}{star_text}")
+        
+        lines.append("")
+        lines.append("</td><td valign='top' width='50%'>")
+        lines.append("")
+        
+        # Second column
+        for i, repo in enumerate(top_repos[half:]):
+            repo_name = repo["name"].split('/')[-1]
+            commits = repo["commits"]
+            stars = repo["stars"]
+            full_name = repo["name"]
+            
+            if commits >= 50:
+                activity = "🔥"
+            elif commits >= 20:
+                activity = "⚡"
+            else:
+                activity = "📝"
+            
+            star_text = f" ({stars}⭐)" if stars > 0 else ""
+            lines.append(f"- {activity} [{repo_name}](https://github.com/{full_name}) - {commits}{star_text}")
+        
+        lines.append("")
+        lines.append("</td></tr></table>")
         lines.append("")
 
     return "\n".join(lines) + "\n"
@@ -483,7 +626,7 @@ def main():
     except Exception as e:
         print(f"[warn] Blog fetch failed: {e}", file=sys.stderr)
 
-    # Fetch GitHub stats
+    # Fetch GitHub stats with commit analysis
     token = GITHUB_TOKEN
     if not token:
         print("[error] GITHUB_TOKEN is not set", file=sys.stderr)
@@ -493,6 +636,12 @@ def main():
             if not login:
                 raise RuntimeError("GH_LOGIN not set")
             stats = fetch_github_stats(login, token, recent_days_window=recent_days)
+            
+            # Add commit analysis
+            commit_analysis = analyze_commit_messages(login, token)
+            if commit_analysis:
+                stats['commit_analysis'] = commit_analysis
+            
             stats_block = render_stats_block(stats, max_languages=max_langs, max_frameworks=max_frames)
         except Exception as e:
             print(f"[warn] GitHub stats fetch failed: {e}", file=sys.stderr)
