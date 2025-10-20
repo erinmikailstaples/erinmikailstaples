@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2025-10-20 20:30 UTC*
+*Last updated: 2025-10-20 21:35 UTC*
 
 - [AI needs APIs](https://www.erinmikailstaples.com/ai-needs-apis/) — Aug 20, 2025
 - [The blog outline that beats all other blog outlines (for me).](https://www.erinmikailstaples.com/the-blog-outline-that-beats-all-other-blog-outlines/) — Jan 04, 2024
@@ -42,8 +42,8 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <!-- DYNAMIC:START:stats -->
 ## 📊 GitHub Activity
 
-**🚀 600 commits this year**
-- Most used commit word: **readme**
+**🚀 602 commits this year**
+- Random commit word: **"large"** (used 2 times)
 - Most commits in 1 minute: **5**
 - PRs merged: **81** (60.9% success rate)
 
@@ -65,6 +65,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 🔥 **[sdk-examples](https://github.com/rungalileo/sdk-examples)** — 107 commits (12⭐)<br/>
 🔥 **[space-speed](https://github.com/rungalileo/space-speed)** — 79 commits (1⭐)<br/>
 ⚡ **[docs-official](https://github.com/rungalileo/docs-official)** — 73 commits (4⭐)<br/>
+📝 **[erinmikailstaples](https://github.com/erinmikailstaples/erinmikailstaples)** — 12 commits (1⭐)<br/>
 
 </td><td width='50%' valign='top'>
 
