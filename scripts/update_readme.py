@@ -280,10 +280,10 @@ def fetch_github_stats(login, token, recent_days_window=90):
         if not is_recent:
             continue
 
-        # Only include repos with meaningful activity (15+ commits this year)
+        # Include repos with meaningful activity (lower threshold for 5 repos)
         repo_name = repo.get("nameWithOwner", "")
         repo_stars = repo.get("stargazerCount", 0)
-        if repo_name and contribs >= 15:  # Raised threshold from 1 to 15
+        if repo_name and contribs >= 12:  # Lowered to 12 to get ~5 repos
             recent_repos.append({
                 "name": repo_name,
                 "commits": contribs,
@@ -383,15 +383,26 @@ def generate_ascii_language_chart(languages):
     return "\n".join(lines)
 
 def analyze_commit_messages(login, token):
-    """Analyze commit messages for fun statistics"""
+    """Analyze commit messages and PR statistics for fun facts"""
     try:
         import re
         from collections import Counter, defaultdict
         
-        # Get recent commits from multiple repositories
+        # Get commits and PR statistics
         query = """
         query($login: String!) {
           user(login: $login) {
+            contributionsCollection {
+              pullRequestContributions(first: 100) {
+                totalCount
+                nodes {
+                  pullRequest {
+                    merged
+                    createdAt
+                  }
+                }
+              }
+            }
             repositories(first: 50, orderBy: {field: PUSHED_AT, direction: DESC}, ownerAffiliations: OWNER) {
               nodes {
                 defaultBranchRef {
@@ -415,6 +426,13 @@ def analyze_commit_messages(login, token):
         variables = {"login": login}
         data = gh_graphql(query, variables, token)
         
+        # Process PR data
+        pr_contributions = data["user"]["contributionsCollection"].get("pullRequestContributions", {})
+        total_prs = pr_contributions.get("totalCount", 0)
+        pr_nodes = pr_contributions.get("nodes", [])
+        merged_prs = sum(1 for node in pr_nodes if node.get("pullRequest", {}).get("merged", False))
+        
+        # Process commits
         commits = []
         for repo in data["user"]["repositories"]["nodes"]:
             if repo.get("defaultBranchRef") and repo["defaultBranchRef"].get("target"):
@@ -472,18 +490,17 @@ def analyze_commit_messages(login, token):
         # Get max commits in one minute
         max_commits_per_minute = max(commits_by_minute.values()) if commits_by_minute else 0
         
-        # Create oops-o-meter visual (out of 20)
-        oops_percentage = min(100, (oops_count / len(commits)) * 100) if commits else 0
-        oops_bar_length = 20
-        oops_filled = int((oops_percentage / 100) * oops_bar_length)
-        oops_empty = oops_bar_length - oops_filled
-        oops_bar = "█" * oops_filled + "░" * oops_empty
+        # Calculate fun facts
+        avg_commits_per_day = len(commits) / max(1, len(set(c['date'][:10] for c in commits if c['date'])))
+        merge_rate = (merged_prs / max(1, total_prs)) * 100 if total_prs > 0 else 0
         
         return {
             'most_common_word': most_common_word[0],
             'max_commits_per_minute': max_commits_per_minute,
-            'oops_count': oops_count,
-            'oops_bar': oops_bar
+            'total_prs': total_prs,
+            'merged_prs': merged_prs,
+            'merge_rate': round(merge_rate, 1),
+            'avg_commits_per_day': round(avg_commits_per_day, 1)
         }
         
     except Exception as e:
@@ -504,11 +521,13 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
         commits_text += f" *(+{rc} private)*"
     lines.append(commits_text)
     
-    # Add fun commit facts (simplified)
+    # Add fun commit and PR facts
     commit_stats = stats.get('commit_analysis')
     if commit_stats:
         lines.append(f"- Most used commit word: **{commit_stats['most_common_word']}**")
         lines.append(f"- Most commits in 1 minute: **{commit_stats['max_commits_per_minute']}**")
+        if commit_stats.get('merged_prs', 0) > 0:
+            lines.append(f"- PRs merged: **{commit_stats['merged_prs']}** ({commit_stats.get('merge_rate', 0)}% success rate)")
     lines.append("")
 
     # Languages section with ASCII chart
@@ -524,21 +543,21 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
         lines.append("**🛠️ Frameworks:** " + " • ".join(frames[:max_frameworks]))
         lines.append("")
 
-    # Repositories section - TWO COLUMNS with better styling
+    # Repositories section with clean table format
     repos = stats.get("repositories", [])
     if repos:
         lines.append("### 📈 Active Repositories")
         lines.append("")
         
-        # Create two-column layout with clean styling
-        lines.append('<div style="display: flex; flex-wrap: wrap; gap: 20px;">')
-        lines.append('<div style="flex: 1; min-width: 300px;">')
+        top_repos = repos[:max_repositories]
+        
+        # Use simple table for better compatibility
+        lines.append("<table>")
+        lines.append("<tr><td width='50%' valign='top'>")
         lines.append("")
         
-        top_repos = repos[:max_repositories]
-        half = len(top_repos) // 2 + len(top_repos) % 2
-        
         # First column
+        half = (len(top_repos) + 1) // 2
         for i, repo in enumerate(top_repos[:half]):
             repo_name = repo["name"].split('/')[-1]
             commits = repo["commits"]
@@ -546,17 +565,17 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
             full_name = repo["name"]
             
             if commits >= 75:
-                activity = "🔥"  # Very Active: 75+ commits
+                activity = "🔥"
             elif commits >= 30:
-                activity = "⚡"  # Active: 30+ commits
+                activity = "⚡"
             else:
-                activity = "📝"  # Regular: 15+ commits (due to our filter)
+                activity = "📝"
             
             star_text = f" ({stars}⭐)" if stars > 0 else ""
-            lines.append(f"{activity} **[{repo_name}](https://github.com/{full_name})** — {commits} commits{star_text}  ")
+            lines.append(f"{activity} **[{repo_name}](https://github.com/{full_name})** — {commits} commits{star_text}<br/>")
         
         lines.append("")
-        lines.append('</div><div style="flex: 1; min-width: 300px;">')
+        lines.append("</td><td width='50%' valign='top'>")
         lines.append("")
         
         # Second column
@@ -567,17 +586,17 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
             full_name = repo["name"]
             
             if commits >= 75:
-                activity = "🔥"  # Very Active: 75+ commits
+                activity = "🔥"
             elif commits >= 30:
-                activity = "⚡"  # Active: 30+ commits
+                activity = "⚡"
             else:
-                activity = "📝"  # Regular: 15+ commits (due to our filter)
+                activity = "📝"
             
             star_text = f" ({stars}⭐)" if stars > 0 else ""
-            lines.append(f"{activity} **[{repo_name}](https://github.com/{full_name})** — {commits} commits{star_text}  ")
+            lines.append(f"{activity} **[{repo_name}](https://github.com/{full_name})** — {commits} commits{star_text}<br/>")
         
         lines.append("")
-        lines.append('</div></div>')
+        lines.append("</td></tr></table>")
         lines.append("")
 
     return "\n".join(lines) + "\n"
