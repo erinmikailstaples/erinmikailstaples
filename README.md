@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2025-10-20 20:01 UTC*
+*Last updated: 2025-10-20 20:05 UTC*
 
 - [AI needs APIs](https://www.erinmikailstaples.com/ai-needs-apis/) — Aug 20, 2025
 - [The blog outline that beats all other blog outlines (for me).](https://www.erinmikailstaples.com/the-blog-outline-that-beats-all-other-blog-outlines/) — Jan 04, 2024
@@ -42,35 +42,39 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <!-- DYNAMIC:START:stats -->
 ## 📊 GitHub Activity
 
-**🚀 597 commits this year**
+**🚀 598 commits this year**
 - Most used commit word: **readme**
 - 💩 Most commits in 1 minute: **5**
 - Oops-o-meter: `█░░░░░░░░░░░░░░░░░░░` **143**
 
-<div align='center'>
-
 ### 💻 Programming Languages
-![Languages Chart](./languages_chart.png)
-
-</div>
+```
+🐍 Python     48% ║████████████░░░░░░░░░░░░░║
+📝 MDX        18% ║████░░░░░░░░░░░░░░░░░░░░░║
+🔷 TypeScript 16% ║████░░░░░░░░░░░░░░░░░░░░░║
+🟨 JavaScript  7% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
+🎨 CSS         7% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
+🔧 Handlebars  3% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
+```
 
 ### 📈 Active Repositories
 
-<table><tr><td valign='top' width='50%'>
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+<div style="flex: 1; min-width: 300px;">
 
-- 🔥 [sdk-examples](https://github.com/rungalileo/sdk-examples) - 107 (12⭐)
-- 🔥 [space-speed](https://github.com/rungalileo/space-speed) - 79 (1⭐)
-- 🔥 [docs-official](https://github.com/rungalileo/docs-official) - 73 (4⭐)
-- ⚡ [blogblogblog](https://github.com/erinmikailstaples/blogblogblog) - 44 (2⭐)
+🔥 **[sdk-examples](https://github.com/rungalileo/sdk-examples)** — 107 commits (12⭐)  
+🔥 **[space-speed](https://github.com/rungalileo/space-speed)** — 79 commits (1⭐)  
+🔥 **[docs-official](https://github.com/rungalileo/docs-official)** — 73 commits (4⭐)  
+⚡ **[blogblogblog](https://github.com/erinmikailstaples/blogblogblog)** — 44 commits (2⭐)  
 
-</td><td valign='top' width='50%'>
+</div><div style="flex: 1; min-width: 300px;">
 
-- ⚡ [codetv](https://github.com/elviskahoro/codetv) - 27
-- 📝 [ghost-tools](https://github.com/erinmikailstaples/ghost-tools) - 12 (1⭐)
-- 📝 [AstroTurf](https://github.com/erinmikailstaples/AstroTurf) - 12 (1⭐)
-- 📝 [proj-talkback](https://github.com/rungalileo/proj-talkback) - 12
+⚡ **[codetv](https://github.com/elviskahoro/codetv)** — 27 commits  
+📝 **[ghost-tools](https://github.com/erinmikailstaples/ghost-tools)** — 12 commits (1⭐)  
+📝 **[AstroTurf](https://github.com/erinmikailstaples/AstroTurf)** — 12 commits (1⭐)  
+📝 **[proj-talkback](https://github.com/rungalileo/proj-talkback)** — 12 commits  
 
-</td></tr></table>
+</div></div>
 
 <!-- DYNAMIC:END:stats -->
 

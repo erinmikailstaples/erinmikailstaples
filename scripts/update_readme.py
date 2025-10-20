@@ -343,47 +343,44 @@ def render_blog_block(posts, date_format="%b %d, %Y"):
                 lines.append(f"- [{p['title']}]({p['link']})")
     return "\n".join(lines) + "\n"
 
-def generate_language_chart(languages, filename="languages_chart.png"):
-    """Generate a smaller pie chart for language usage"""
-    try:
-        import matplotlib.pyplot as plt
-        import matplotlib.patches as mpatches
+def generate_ascii_language_chart(languages):
+    """Generate a beautiful ASCII chart for language usage"""
+    lines = []
+    lines.append("### 💻 Programming Languages")
+    lines.append("```")
+    
+    # Language emojis for visual appeal
+    lang_emojis = {
+        'Python': '🐍',
+        'JavaScript': '🟨',
+        'TypeScript': '🔷',
+        'MDX': '📝',
+        'CSS': '🎨',
+        'HTML': '🌐',
+        'Handlebars': '🔧',
+        'Go': '🐹',
+        'Rust': '🦀',
+        'Java': '☕',
+        'C++': '⚡',
+        'C': '⚙️'
+    }
+    
+    max_lang_len = max(len(lang) for lang, _ in languages[:6]) if languages else 0
+    
+    for name, pct in languages[:6]:
+        emoji = lang_emojis.get(name, '📄')
+        # Create visual bar
+        bar_length = 25
+        filled = int((pct / 100) * bar_length)
+        empty = bar_length - filled
+        bar = "█" * filled + "░" * empty
         
-        # Prepare data
-        labels = []
-        sizes = []
-        colors = ['#3776ab', '#e34c26', '#f1e05a', '#563d7c', '#2b7489', '#f1502f']
-        
-        for i, (name, pct) in enumerate(languages[:6]):
-            labels.append(f"{name}\n{pct}%")
-            sizes.append(pct)
-        
-        # Create figure with dark theme - SMALLER SIZE
-        plt.style.use('dark_background')
-        fig, ax = plt.subplots(figsize=(6, 4))  # Reduced from 8x6
-        
-        # Create pie chart
-        wedges, texts, autotexts = ax.pie(sizes, labels=labels, colors=colors[:len(sizes)], 
-                                         autopct='', startangle=90,
-                                         textprops={'fontsize': 9, 'weight': 'bold'})  # Smaller font
-        
-        # Style the chart
-        ax.set_title('Programming Languages', fontsize=14, weight='bold', pad=15)  # Smaller title
-        
-        # Equal aspect ratio ensures that pie is drawn as a circle
-        ax.axis('equal')
-        
-        # Save the chart
-        plt.tight_layout()
-        plt.savefig(filename, dpi=120, bbox_inches='tight', facecolor='#0d1117', edgecolor='none')  # Lower DPI
-        plt.close()
-        
-        return True
-    except ImportError:
-        return False
-    except Exception as e:
-        print(f"Chart generation failed: {e}")
-        return False
+        # Format with proper spacing
+        name_padded = name.ljust(max_lang_len)
+        lines.append(f"{emoji} {name_padded} {pct:2d}% ║{bar}║")
+    
+    lines.append("```")
+    return "\n".join(lines)
 
 def analyze_commit_messages(login, token):
     """Analyze commit messages for fun statistics"""
@@ -441,9 +438,16 @@ def analyze_commit_messages(login, token):
         for commit in commits:
             message = commit['message'].lower()
             
-            # Extract words (remove common prefixes and punctuation)
-            words = re.findall(r'\b\w{3,}\b', message)
-            words = [w for w in words if w not in ['add', 'update', 'fix', 'remove', 'the', 'and', 'for', 'with']]
+            # Extract words (better filtering for meaningful words)
+            # Remove common git patterns and get meaningful words
+            clean_msg = re.sub(r'^(feat|fix|docs|style|refactor|test|chore)[\(:].*?[\):]\s*', '', message)
+            words = re.findall(r'\b\w{4,}\b', clean_msg)  # 4+ letter words
+            # Filter out common commit words and generic terms
+            excluded = {'feat', 'fix', 'add', 'update', 'remove', 'delete', 'change', 'modify', 
+                       'create', 'make', 'implement', 'improve', 'refactor', 'clean', 'bump',
+                       'merge', 'initial', 'commit', 'changes', 'files', 'code', 'work',
+                       'with', 'from', 'for', 'and', 'the', 'this', 'that', 'more', 'some'}
+            words = [w for w in words if w.lower() not in excluded and len(w) >= 4]
             all_words.extend(words)
             
             # Check for "oops" keywords
@@ -508,26 +512,12 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
         lines.append(f"- Oops-o-meter: `{commit_stats['oops_bar']}` **{commit_stats['oops_count']}**")
     lines.append("")
 
-    # Languages section with smaller chart
+    # Languages section with ASCII chart
     langs = stats.get("languages", [])
     if langs:
-        # Try to generate chart
-        chart_generated = generate_language_chart(langs[:max_languages])
-        
-        if chart_generated:
-            lines.append("<div align='center'>")
-            lines.append("")
-            lines.append("### 💻 Programming Languages")
-            lines.append("![Languages Chart](./languages_chart.png)")
-            lines.append("")
-            lines.append("</div>")
-            lines.append("")
-        else:
-            # Fallback to compact text format
-            lines.append("### 💻 Languages")
-            lang_items = [f"{name} ({pct}%)" for name, pct in langs[:max_languages]]
-            lines.append(" • ".join(lang_items))
-            lines.append("")
+        ascii_chart = generate_ascii_language_chart(langs[:max_languages])
+        lines.append(ascii_chart)
+        lines.append("")
 
     # Frameworks section - more compact
     frames = stats.get("frameworks", [])
@@ -535,14 +525,15 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
         lines.append("**🛠️ Frameworks:** " + " • ".join(frames[:max_frameworks]))
         lines.append("")
 
-    # Repositories section - TWO COLUMNS
+    # Repositories section - TWO COLUMNS with better styling
     repos = stats.get("repositories", [])
     if repos:
         lines.append("### 📈 Active Repositories")
         lines.append("")
         
-        # Create two-column layout using HTML table
-        lines.append("<table><tr><td valign='top' width='50%'>")
+        # Create two-column layout with clean styling
+        lines.append('<div style="display: flex; flex-wrap: wrap; gap: 20px;">')
+        lines.append('<div style="flex: 1; min-width: 300px;">')
         lines.append("")
         
         top_repos = repos[:max_repositories]
@@ -563,10 +554,10 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
                 activity = "📝"
             
             star_text = f" ({stars}⭐)" if stars > 0 else ""
-            lines.append(f"- {activity} [{repo_name}](https://github.com/{full_name}) - {commits}{star_text}")
+            lines.append(f"{activity} **[{repo_name}](https://github.com/{full_name})** — {commits} commits{star_text}  ")
         
         lines.append("")
-        lines.append("</td><td valign='top' width='50%'>")
+        lines.append('</div><div style="flex: 1; min-width: 300px;">')
         lines.append("")
         
         # Second column
@@ -584,10 +575,10 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
                 activity = "📝"
             
             star_text = f" ({stars}⭐)" if stars > 0 else ""
-            lines.append(f"- {activity} [{repo_name}](https://github.com/{full_name}) - {commits}{star_text}")
+            lines.append(f"{activity} **[{repo_name}](https://github.com/{full_name})** — {commits} commits{star_text}  ")
         
         lines.append("")
-        lines.append("</td></tr></table>")
+        lines.append('</div></div>')
         lines.append("")
 
     return "\n".join(lines) + "\n"
