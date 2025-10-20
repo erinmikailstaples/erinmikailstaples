@@ -483,9 +483,20 @@ def analyze_commit_messages(login, token):
                 except:
                     pass
         
-        # Get most common word
+        # Get a random interesting word instead of most common
         word_counts = Counter(all_words)
-        most_common_word = word_counts.most_common(1)[0] if word_counts else ('code', 0)
+        if word_counts:
+            # Filter to interesting words (not too common, not too rare)
+            interesting_words = [(word, count) for word, count in word_counts.items() 
+                               if 2 <= count <= 20 and len(word) >= 5]
+            if interesting_words:
+                import random
+                random_word, word_frequency = random.choice(interesting_words)
+            else:
+                # Fallback to most common if no interesting words found
+                random_word, word_frequency = word_counts.most_common(1)[0]
+        else:
+            random_word, word_frequency = 'code', 1
         
         # Get max commits in one minute
         max_commits_per_minute = max(commits_by_minute.values()) if commits_by_minute else 0
@@ -495,7 +506,8 @@ def analyze_commit_messages(login, token):
         merge_rate = (merged_prs / max(1, total_prs)) * 100 if total_prs > 0 else 0
         
         return {
-            'most_common_word': most_common_word[0],
+            'random_word': random_word,
+            'word_frequency': word_frequency,
             'max_commits_per_minute': max_commits_per_minute,
             'total_prs': total_prs,
             'merged_prs': merged_prs,
@@ -524,7 +536,9 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
     # Add fun commit and PR facts
     commit_stats = stats.get('commit_analysis')
     if commit_stats:
-        lines.append(f"- Most used commit word: **{commit_stats['most_common_word']}**")
+        random_word = commit_stats.get('random_word', 'code')
+        word_freq = commit_stats.get('word_frequency', 1)
+        lines.append(f"- Random commit word: **\"{random_word}\"** (used {word_freq} times)")
         lines.append(f"- Most commits in 1 minute: **{commit_stats['max_commits_per_minute']}**")
         if commit_stats.get('merged_prs', 0) > 0:
             lines.append(f"- PRs merged: **{commit_stats['merged_prs']}** ({commit_stats.get('merge_rate', 0)}% success rate)")
