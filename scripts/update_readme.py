@@ -345,37 +345,74 @@ def render_blog_block(posts, date_format="%b %d, %Y"):
 
 def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositories=8):
     lines = []
-    lines.append("### GitHub activity")
-    commits_line = f"- Commits this year: {stats.get('total_commits_year', 0)}"
+    lines.append("## 📊 GitHub Activity")
+    lines.append("")
+    
+    # Commits section with visual indicator
+    total_commits = stats.get('total_commits_year', 0)
     rc = stats.get("restricted_commits_year", 0) or 0
+    
+    lines.append("### 🚀 This Year's Contributions")
+    lines.append(f"```")
+    lines.append(f"Total Commits: {total_commits}")
     if rc > 0:
-        commits_line += f" (+{rc} private)"
-    lines.append(commits_line)
+        lines.append(f"Private Repos: +{rc}")
+    lines.append(f"```")
+    lines.append("")
 
+    # Languages section with progress bars
     langs = stats.get("languages", [])
     if langs:
+        lines.append("### 💻 Top Languages")
+        lines.append("| Language | Usage | Chart |")
+        lines.append("|----------|-------|-------|")
+        
         top = langs[:max_languages]
-        lang_text = ", ".join([f"{name} ({pct}%)" for name, pct in top])
-        lines.append(f"- Recently used languages: {lang_text}")
+        for name, pct in top:
+            # Create a visual bar using Unicode blocks
+            bar_length = 20
+            filled = int((pct / 100) * bar_length)
+            empty = bar_length - filled
+            bar = "█" * filled + "░" * empty
+            lines.append(f"| {name} | {pct}% | `{bar}` |")
+        lines.append("")
 
+    # Frameworks section with emoji badges
     frames = stats.get("frameworks", [])
     if frames:
-        frames = frames[:max_frameworks]
-        lines.append(f"- Recently used frameworks: {', '.join(frames)}")
+        lines.append("### 🛠️ Frameworks & Tools")
+        frame_badges = []
+        for frame in frames[:max_frameworks]:
+            frame_badges.append(f"`{frame}`")
+        lines.append(" ".join(frame_badges))
+        lines.append("")
 
+    # Repositories section with better table format
     repos = stats.get("repositories", [])
     if repos:
+        lines.append("### 📈 Most Active Repositories")
+        lines.append("| Repository | Commits | Stars | Activity |")
+        lines.append("|------------|---------|-------|----------|")
+        
         top_repos = repos[:max_repositories]
-        repo_links = []
         for repo in top_repos:
             repo_name = repo["name"]
             commits = repo["commits"]
             stars = repo["stars"]
-            if stars > 0:
-                repo_links.append(f"[{repo_name}](https://github.com/{repo_name}) ({commits} commits, {stars} ⭐)")
+            
+            # Create activity indicator
+            if commits >= 50:
+                activity = "🔥 Very Active"
+            elif commits >= 20:
+                activity = "⚡ Active"
+            elif commits >= 10:
+                activity = "📝 Regular"
             else:
-                repo_links.append(f"[{repo_name}](https://github.com/{repo_name}) ({commits} commits)")
-        lines.append(f"- Recently active repositories: {', '.join(repo_links)}")
+                activity = "💡 Contributing"
+            
+            star_display = f"⭐ {stars}" if stars > 0 else "—"
+            lines.append(f"| [{repo_name}](https://github.com/{repo_name}) | {commits} | {star_display} | {activity} |")
+        lines.append("")
 
     return "\n".join(lines) + "\n"
 
