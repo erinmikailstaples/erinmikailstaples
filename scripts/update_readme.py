@@ -235,6 +235,7 @@ def fetch_github_stats(login, token, recent_days_window=90):
     # Aggregate languages and frameworks for repos with recent contributions
     langs_weight = {}
     frameworks_weight = {}
+    recent_repos = []  # Track recent repositories
 
     # Simple framework keyword map (topics to display names)
     FRAME_KEYS = {
@@ -279,6 +280,16 @@ def fetch_github_stats(login, token, recent_days_window=90):
         if not is_recent:
             continue
 
+        # Collect recent repository info
+        repo_name = repo.get("nameWithOwner", "")
+        repo_stars = repo.get("stargazerCount", 0)
+        if repo_name and contribs > 0:
+            recent_repos.append({
+                "name": repo_name,
+                "commits": contribs,
+                "stars": repo_stars
+            })
+
         langs = (repo.get("languages") or {}).get("edges", [])
         total_size = sum(edge.get("size", 0) for edge in langs) or 1
         for edge in langs:
@@ -303,17 +314,23 @@ def fetch_github_stats(login, token, recent_days_window=90):
     langs_pct = [(name, round((w / total_lang_weight) * 100)) for name, w in langs_sorted]
 
     frameworks_sorted = sorted(frameworks_weight.items(), key=lambda x: x[1], reverse=True)
+    
+    # Sort repositories by commit count, then by stars
+    repos_sorted = sorted(recent_repos, key=lambda x: (x["commits"], x["stars"]), reverse=True)
 
     return {
         "total_commits_year": total_commits,
         "restricted_commits_year": restricted,
         "languages": langs_pct,
-        "frameworks": [name for name, _ in frameworks_sorted]
+        "frameworks": [name for name, _ in frameworks_sorted],
+        "repositories": repos_sorted
     }
 
 def render_blog_block(posts, date_format="%b %d, %Y"):
     lines = []
     lines.append("### Latest from my blog")
+    lines.append(f"*Last updated: {dt.datetime.now(TZ).strftime('%Y-%m-%d %H:%M UTC')}*")
+    lines.append("")  # Empty line for spacing
     if not posts:
         lines.append("_No recent posts found._")
     else:
@@ -324,10 +341,9 @@ def render_blog_block(posts, date_format="%b %d, %Y"):
                 lines.append(f"- [{p['title']}]({p['link']}) — {d}")
             else:
                 lines.append(f"- [{p['title']}]({p['link']})")
-    lines.append(f"Last updated: {dt.datetime.now(TZ).strftime('%Y-%m-%d %H:%M UTC')}")
     return "\n".join(lines) + "\n"
 
-def render_stats_block(stats, max_languages=6, max_frameworks=6):
+def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositories=8):
     lines = []
     lines.append("### GitHub activity")
     commits_line = f"- Commits this year: {stats.get('total_commits_year', 0)}"
@@ -346,6 +362,20 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6):
     if frames:
         frames = frames[:max_frameworks]
         lines.append(f"- Recently used frameworks: {', '.join(frames)}")
+
+    repos = stats.get("repositories", [])
+    if repos:
+        top_repos = repos[:max_repositories]
+        repo_links = []
+        for repo in top_repos:
+            repo_name = repo["name"]
+            commits = repo["commits"]
+            stars = repo["stars"]
+            if stars > 0:
+                repo_links.append(f"[{repo_name}](https://github.com/{repo_name}) ({commits} commits, {stars} ⭐)")
+            else:
+                repo_links.append(f"[{repo_name}](https://github.com/{repo_name}) ({commits} commits)")
+        lines.append(f"- Recently active repositories: {', '.join(repo_links)}")
 
     return "\n".join(lines) + "\n"
 

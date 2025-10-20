@@ -20,12 +20,13 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
+*Last updated: 2025-10-20 19:41 UTC*
+
 - [AI needs APIs](https://www.erinmikailstaples.com/ai-needs-apis/) — Aug 20, 2025
 - [The blog outline that beats all other blog outlines (for me).](https://www.erinmikailstaples.com/the-blog-outline-that-beats-all-other-blog-outlines/) — Jan 04, 2024
 - [Reflections on Re:Invent '23](https://www.erinmikailstaples.com/reflections-on-re-invent-23/) — Dec 04, 2023
 - [From Talk to Takeoff: harnessing the PyData Berlin presentation as a catalyst for our larger content efforts.](https://www.erinmikailstaples.com/from-talk-to-takeoff-harnessing-the-pydata-berlin-presentation-as-a-catalyst-for-our-larger-content-efforts/) — Aug 07, 2023
 - [Enabling User Adoption for New Generative AI Templates through Education](https://www.erinmikailstaples.com/enabling-user-adoption-for-new-generative-ai-templates-through-multi-platform-education-documentation/) — Aug 07, 2023
-Last updated: 2025-10-20 19:14 UTC
 <!-- DYNAMIC:END:blog -->
 
 ### Highlights (curated projects & posts)
@@ -37,18 +38,12 @@ Last updated: 2025-10-20 19:14 UTC
 - [Label Studio Integrations Directory](https://labelstud.io/integrations)
 - [Get Started with Label Studio](https://labelstud.io/blog/zero-to-one-getting-started-with-label-studio/)
 
-### Popular Musings:
-
-- [Cleaning up your Notion so you actually get use out of it](https://www.erinmikailstaples.com/notion-clean-up/)
-- [Tracking in-person Event Attendance using Orbit](https://orbit.love/blog/tracking-in-person-event-attendance)
-- [The Role of a Community Advocate](https://orbit.love/blog/the-role-of-a-community-advocate)
-- [How I went from dicking around on the internet to Virtual Mall CEO](https://medium.com/greener-pastures-by-elliot/how-i-went-from-dicking-around-on-the-internet-to-virtual-mall-ceo-66f479135522)
-
 
 <!-- DYNAMIC:START:stats -->
 ### GitHub activity
-- Commits this year: 582
-- Recently used languages: Python (45%), MDX (19%), TypeScript (17%), JavaScript (7%), CSS (7%), Handlebars (3%)
+- Commits this year: 590
+- Recently used languages: Python (47%), MDX (18%), TypeScript (16%), JavaScript (7%), CSS (7%), Handlebars (3%)
+- Recently active repositories: [rungalileo/sdk-examples](https://github.com/rungalileo/sdk-examples) (107 commits, 12 ⭐), [rungalileo/space-speed](https://github.com/rungalileo/space-speed) (79 commits, 1 ⭐), [rungalileo/docs-official](https://github.com/rungalileo/docs-official) (73 commits, 4 ⭐), [erinmikailstaples/blogblogblog](https://github.com/erinmikailstaples/blogblogblog) (44 commits, 2 ⭐), [elviskahoro/codetv](https://github.com/elviskahoro/codetv) (27 commits), [erinmikailstaples/AstroTurf](https://github.com/erinmikailstaples/AstroTurf) (12 commits, 1 ⭐), [rungalileo/proj-talkback](https://github.com/rungalileo/proj-talkback) (12 commits), [agntcy/agentic-apps](https://github.com/agntcy/agentic-apps) (10 commits, 69 ⭐)
 <!-- DYNAMIC:END:stats -->
 
 <h3 align="center">Connect with me:</h3>
