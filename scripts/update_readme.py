@@ -267,23 +267,23 @@ def fetch_github_stats(login, token, recent_days_window=90):
         if contribs <= 0:
             continue
 
-        # Filter to recently active repos (pushedAt within window)
+        # Filter to recently active repos (stricter criteria)
         pushed_at = repo.get("pushedAt")
         is_recent = True
         try:
             if pushed_at:
                 # 2025-10-18T16:58:12Z
                 pushed_dt = dt.datetime.strptime(pushed_at, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=TZ)
-                is_recent = pushed_dt >= dt.datetime.now(TZ) - dt.timedelta(days=90)
+                is_recent = pushed_dt >= dt.datetime.now(TZ) - dt.timedelta(days=60)  # 60 days instead of 90
         except Exception:
             pass
         if not is_recent:
             continue
 
-        # Collect recent repository info
+        # Only include repos with meaningful activity (15+ commits this year)
         repo_name = repo.get("nameWithOwner", "")
         repo_stars = repo.get("stargazerCount", 0)
-        if repo_name and contribs > 0:
+        if repo_name and contribs >= 15:  # Raised threshold from 1 to 15
             recent_repos.append({
                 "name": repo_name,
                 "commits": contribs,
@@ -504,12 +504,11 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
         commits_text += f" *(+{rc} private)*"
     lines.append(commits_text)
     
-    # Add fun commit facts
+    # Add fun commit facts (simplified)
     commit_stats = stats.get('commit_analysis')
     if commit_stats:
         lines.append(f"- Most used commit word: **{commit_stats['most_common_word']}**")
-        lines.append(f"- 💩 Most commits in 1 minute: **{commit_stats['max_commits_per_minute']}**")
-        lines.append(f"- Oops-o-meter: `{commit_stats['oops_bar']}` **{commit_stats['oops_count']}**")
+        lines.append(f"- Most commits in 1 minute: **{commit_stats['max_commits_per_minute']}**")
     lines.append("")
 
     # Languages section with ASCII chart
@@ -546,12 +545,12 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
             stars = repo["stars"]
             full_name = repo["name"]
             
-            if commits >= 50:
-                activity = "🔥"
-            elif commits >= 20:
-                activity = "⚡"
+            if commits >= 75:
+                activity = "🔥"  # Very Active: 75+ commits
+            elif commits >= 30:
+                activity = "⚡"  # Active: 30+ commits
             else:
-                activity = "📝"
+                activity = "📝"  # Regular: 15+ commits (due to our filter)
             
             star_text = f" ({stars}⭐)" if stars > 0 else ""
             lines.append(f"{activity} **[{repo_name}](https://github.com/{full_name})** — {commits} commits{star_text}  ")
@@ -567,12 +566,12 @@ def render_stats_block(stats, max_languages=6, max_frameworks=6, max_repositorie
             stars = repo["stars"]
             full_name = repo["name"]
             
-            if commits >= 50:
-                activity = "🔥"
-            elif commits >= 20:
-                activity = "⚡"
+            if commits >= 75:
+                activity = "🔥"  # Very Active: 75+ commits
+            elif commits >= 30:
+                activity = "⚡"  # Active: 30+ commits
             else:
-                activity = "📝"
+                activity = "📝"  # Regular: 15+ commits (due to our filter)
             
             star_text = f" ({stars}⭐)" if stars > 0 else ""
             lines.append(f"{activity} **[{repo_name}](https://github.com/{full_name})** — {commits} commits{star_text}  ")
