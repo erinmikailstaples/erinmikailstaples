@@ -20,13 +20,13 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2025-10-20 21:35 UTC*
+*Last updated: 2025-11-17 19:42 UTC*
 
-- [AI needs APIs](https://www.erinmikailstaples.com/ai-needs-apis/) — Aug 20, 2025
-- [The blog outline that beats all other blog outlines (for me).](https://www.erinmikailstaples.com/the-blog-outline-that-beats-all-other-blog-outlines/) — Jan 04, 2024
-- [Reflections on Re:Invent '23](https://www.erinmikailstaples.com/reflections-on-re-invent-23/) — Dec 04, 2023
-- [From Talk to Takeoff: harnessing the PyData Berlin presentation as a catalyst for our larger content efforts.](https://www.erinmikailstaples.com/from-talk-to-takeoff-harnessing-the-pydata-berlin-presentation-as-a-catalyst-for-our-larger-content-efforts/) — Aug 07, 2023
-- [Enabling User Adoption for New Generative AI Templates through Education](https://www.erinmikailstaples.com/enabling-user-adoption-for-new-generative-ai-templates-through-multi-platform-education-documentation/) — Aug 07, 2023
+- [Building Tutorial Tinder: from idea to deployed Replit demo](https://www.erinmikailstaples.com/building-tutorial-tinder-from-idea-to-deployed-replit-demo/) — Nov 14, 2025
+- [What building a Reactigotchi can teach you about an applications “memory”](https://www.erinmikailstaples.com/what-building-a-reactigotchi-can-teach-you-about-an-applications-memory/) — Nov 05, 2025
+- [How I learned to stop worrying and love the linter.](https://www.erinmikailstaples.com/how-i-learned-to-stop-worrying-and-love-the-linter/) — Nov 03, 2025
+- [Galileo Custom Metrics Campaign — Startup Simulator 3000](https://www.erinmikailstaples.com/galileo-custom-metrics-campaign-startup-simulator-3000/) — Oct 31, 2025
+- [MCP for EDU](https://www.erinmikailstaples.com/mcp-for-edu/) — Oct 29, 2025
 <!-- DYNAMIC:END:blog -->
 
 ### Highlights (curated projects & posts)
@@ -42,19 +42,19 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <!-- DYNAMIC:START:stats -->
 ## 📊 GitHub Activity
 
-**🚀 602 commits this year**
-- Random commit word: **"large"** (used 2 times)
+**🚀 503 commits this year** *(+131 private)*
+- Random commit word: **"catch"** (used 2 times)
 - Most commits in 1 minute: **5**
-- PRs merged: **81** (60.9% success rate)
+- PRs merged: **83** (70.3% success rate)
 
 ### 💻 Programming Languages
 ```
-🐍 Python     51% ║████████████░░░░░░░░░░░░░║
-📝 MDX        21% ║█████░░░░░░░░░░░░░░░░░░░░║
-🔷 TypeScript 19% ║████░░░░░░░░░░░░░░░░░░░░░║
-🟨 JavaScript  4% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
-🎨 CSS         2% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
-🌐 HTML        1% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
+🐍 Python     48% ║████████████░░░░░░░░░░░░░║
+📝 MDX        28% ║███████░░░░░░░░░░░░░░░░░░║
+🔷 TypeScript 14% ║███░░░░░░░░░░░░░░░░░░░░░░║
+🟨 JavaScript  6% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
+🌐 HTML        2% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
+🎨 CSS         1% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
 ```
 
 ### 📈 Active Repositories
@@ -63,15 +63,13 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <tr><td width='50%' valign='top'>
 
 🔥 **[sdk-examples](https://github.com/rungalileo/sdk-examples)** — 107 commits (12⭐)<br/>
-🔥 **[space-speed](https://github.com/rungalileo/space-speed)** — 79 commits (1⭐)<br/>
 ⚡ **[docs-official](https://github.com/rungalileo/docs-official)** — 73 commits (4⭐)<br/>
-📝 **[erinmikailstaples](https://github.com/erinmikailstaples/erinmikailstaples)** — 12 commits (1⭐)<br/>
+📝 **[erinmikailstaples](https://github.com/erinmikailstaples/erinmikailstaples)** — 16 commits (1⭐)<br/>
 
 </td><td width='50%' valign='top'>
 
 📝 **[ghost-tools](https://github.com/erinmikailstaples/ghost-tools)** — 12 commits (1⭐)<br/>
 📝 **[AstroTurf](https://github.com/erinmikailstaples/AstroTurf)** — 12 commits (1⭐)<br/>
-📝 **[proj-talkback](https://github.com/rungalileo/proj-talkback)** — 12 commits<br/>
 
 </td></tr></table>
 
