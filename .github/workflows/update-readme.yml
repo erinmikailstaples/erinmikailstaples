@@ -42,7 +42,7 @@ jobs:
         run: uv python install 3.12
 
       - name: Install dependencies
-        run: uv pip install --system python-dotenv matplotlib
+        run: uv pip install python-dotenv matplotlib
 
       - name: Update README
         run: python scripts/update_readme.py
