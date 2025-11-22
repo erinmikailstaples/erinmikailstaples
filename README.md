@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2025-11-22 00:07 UTC*
+*Last updated: 2025-11-22 01:29 UTC*
 
 - [Building Tutorial Tinder: from idea to deployed Replit demo](https://www.erinmikailstaples.com/building-tutorial-tinder-from-idea-to-deployed-replit-demo/) — Nov 14, 2025
 - [What building a Reactigotchi can teach you about an applications “memory”](https://www.erinmikailstaples.com/what-building-a-reactigotchi-can-teach-you-about-an-applications-memory/) — Nov 05, 2025
@@ -43,16 +43,16 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 ## 📊 GitHub Activity
 
 **🚀 507 commits this year** *(+131 private)*
-- Random commit word: **"openai"** (used 8 times)
+- Random commit word: **"light"** (used 6 times)
 - Most commits in 1 minute: **5**
 - PRs merged: **83** (69.7% success rate)
 
 ### 💻 Programming Languages
 ```
 🐍 Python     48% ║████████████░░░░░░░░░░░░░║
-📝 MDX        27% ║██████░░░░░░░░░░░░░░░░░░░║
-🔷 TypeScript 14% ║███░░░░░░░░░░░░░░░░░░░░░░║
-🟨 JavaScript  6% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
+📝 MDX        29% ║███████░░░░░░░░░░░░░░░░░░║
+🔷 TypeScript 15% ║███░░░░░░░░░░░░░░░░░░░░░░║
+🟨 JavaScript  3% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
 🌐 HTML        2% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
 🎨 CSS         2% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
 ```
@@ -64,11 +64,10 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 🔥 **[sdk-examples](https://github.com/rungalileo/sdk-examples)** — 107 commits (12⭐)<br/>
 ⚡ **[docs-official](https://github.com/rungalileo/docs-official)** — 73 commits (4⭐)<br/>
-📝 **[erinmikailstaples](https://github.com/erinmikailstaples/erinmikailstaples)** — 16 commits (1⭐)<br/>
 
 </td><td width='50%' valign='top'>
 
-📝 **[AstroTurf](https://github.com/erinmikailstaples/AstroTurf)** — 12 commits (1⭐)<br/>
+📝 **[erinmikailstaples](https://github.com/erinmikailstaples/erinmikailstaples)** — 16 commits (1⭐)<br/>
 📝 **[ghost-tools](https://github.com/erinmikailstaples/ghost-tools)** — 12 commits (1⭐)<br/>
 
 </td></tr></table>
