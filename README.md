@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2025-12-31 23:02 UTC*
+*Last updated: 2026-01-01 00:08 UTC*
 
 - [Building Tutorial Tinder: from idea to deployed Replit demo](https://www.erinmikailstaples.com/building-tutorial-tinder-from-idea-to-deployed-replit-demo/) — Nov 14, 2025
 - [What building a Reactigotchi can teach you about an applications “memory”](https://www.erinmikailstaples.com/what-building-a-reactigotchi-can-teach-you-about-an-applications-memory/) — Nov 05, 2025
@@ -42,35 +42,10 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <!-- DYNAMIC:START:stats -->
 ## 📊 GitHub Activity
 
-**🚀 516 commits this year** *(+137 private)*
-- Random commit word: **"notes"** (used 3 times)
+**🚀 0 commits this year**
+- Random commit word: **"simulator"** (used 2 times)
 - Most commits in 1 minute: **5**
 - PRs merged: **83** (69.7% success rate)
-
-### 💻 Programming Languages
-```
-🐍 Python           43% ║██████████░░░░░░░░░░░░░░░║
-📝 MDX              29% ║███████░░░░░░░░░░░░░░░░░░║
-🔷 TypeScript       14% ║███░░░░░░░░░░░░░░░░░░░░░░║
-🟨 JavaScript        5% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
-🌐 HTML              3% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
-📄 Jupyter Notebook  3% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
-```
-
-### 📈 Active Repositories
-
-<table>
-<tr><td width='50%' valign='top'>
-
-🔥 **[sdk-examples](https://github.com/rungalileo/sdk-examples)** — 107 commits (13⭐)<br/>
-⚡ **[docs-official](https://github.com/rungalileo/docs-official)** — 73 commits (4⭐)<br/>
-
-</td><td width='50%' valign='top'>
-
-📝 **[erinmikailstaples](https://github.com/erinmikailstaples/erinmikailstaples)** — 16 commits (1⭐)<br/>
-📝 **[ghost-tools](https://github.com/erinmikailstaples/ghost-tools)** — 12 commits (1⭐)<br/>
-
-</td></tr></table>
 
 <!-- DYNAMIC:END:stats -->
 
