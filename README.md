@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2026-01-08 18:03 UTC*
+*Last updated: 2026-01-08 19:01 UTC*
 
 - [Building Tutorial Tinder: from idea to deployed Replit demo](https://www.erinmikailstaples.com/building-tutorial-tinder-from-idea-to-deployed-replit-demo/) — Nov 14, 2025
 - [What building a Reactigotchi can teach you about an applications “memory”](https://www.erinmikailstaples.com/what-building-a-reactigotchi-can-teach-you-about-an-applications-memory/) — Nov 05, 2025
@@ -42,10 +42,15 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <!-- DYNAMIC:START:stats -->
 ## 📊 GitHub Activity
 
-**🚀 0 commits this year** *(+1 private)*
-- Random commit word: **"halcyon"** (used 2 times)
+**🚀 1 commits this year** *(+1 private)*
+- Random commit word: **"grass"** (used 2 times)
 - Most commits in 1 minute: **5**
 - PRs merged: **83** (69.7% success rate)
+
+### 💻 Programming Languages
+```
+🐍 Python 100% ║█████████████████████████║
+```
 
 <!-- DYNAMIC:END:stats -->
 
