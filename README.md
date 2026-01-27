@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2026-01-27 13:17 UTC*
+*Last updated: 2026-01-27 14:07 UTC*
 
 - [Building Tutorial Tinder: from idea to deployed Replit demo](https://www.erinmikailstaples.com/building-tutorial-tinder-from-idea-to-deployed-replit-demo/) — Nov 14, 2025
 - [What building a Reactigotchi can teach you about an applications “memory”](https://www.erinmikailstaples.com/what-building-a-reactigotchi-can-teach-you-about-an-applications-memory/) — Nov 05, 2025
@@ -42,18 +42,18 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <!-- DYNAMIC:START:stats -->
 ## 📊 GitHub Activity
 
-**🚀 13 commits this year** *(+19 private)*
-- Random commit word: **"cookie"** (used 9 times)
+**🚀 14 commits this year** *(+19 private)*
+- Random commit word: **"environment"** (used 8 times)
 - Most commits in 1 minute: **5**
 - PRs merged: **83** (69.2% success rate)
 
 ### 💻 Programming Languages
 ```
-🔷 TypeScript 47% ║███████████░░░░░░░░░░░░░░║
-📄 Shell      17% ║████░░░░░░░░░░░░░░░░░░░░░║
-🟨 JavaScript 12% ║███░░░░░░░░░░░░░░░░░░░░░░║
-🐍 Python     12% ║███░░░░░░░░░░░░░░░░░░░░░░║
-📄 Lua         6% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
+🔷 TypeScript 40% ║██████████░░░░░░░░░░░░░░░║
+🐍 Python     24% ║██████░░░░░░░░░░░░░░░░░░░║
+📄 Shell      14% ║███░░░░░░░░░░░░░░░░░░░░░░║
+🟨 JavaScript 10% ║██░░░░░░░░░░░░░░░░░░░░░░░║
+📄 Lua         5% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
 📝 MDX         2% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
 ```
 
