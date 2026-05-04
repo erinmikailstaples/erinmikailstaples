@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2026-05-04 19:30 UTC*
+*Last updated: 2026-05-04 20:26 UTC*
 
 - [Building Tutorial Tinder: from idea to deployed Replit demo](https://www.erinmikailstaples.com/building-tutorial-tinder-from-idea-to-deployed-replit-demo/) — Nov 14, 2025
 - [What building a Reactigotchi can teach you about an applications “memory”](https://www.erinmikailstaples.com/what-building-a-reactigotchi-can-teach-you-about-an-applications-memory/) — Nov 05, 2025
@@ -42,18 +42,19 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <!-- DYNAMIC:START:stats -->
 ## 📊 GitHub Activity
 
-**🚀 36 commits this year** *(+912 private)*
-- Random commit word: **"migrate"** (used 3 times)
+**🚀 761 commits this year** *(+88 private)*
+- Random commit word: **"model"** (used 6 times)
 - Most commits in 1 minute: **5**
-- PRs merged: **84** (75.7% success rate)
+- PRs merged: **97** (46.0% success rate)
 
 ### 💻 Programming Languages
 ```
-🐍 Python     81% ║████████████████████░░░░░║
-🟨 JavaScript 14% ║███░░░░░░░░░░░░░░░░░░░░░░║
-📝 MDX         3% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
-🦀 Rust        1% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
-📄 Shell       0% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
+📝 MDX        82% ║████████████████████░░░░░║
+🔷 TypeScript  7% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
+📄 Astro       4% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
+🐍 Python      3% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
+🎨 CSS         3% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
+🟨 JavaScript  1% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
 ```
 
 ### 📈 Active Repositories
@@ -61,10 +62,11 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <table>
 <tr><td width='50%' valign='top'>
 
-📝 **[cookbook-search](https://github.com/timescale/cookbook-search)** — 12 commits (1⭐)<br/>
+🔥 **[Tiger-Data-Docs](https://github.com/timescale/Tiger-Data-Docs)** — 725 commits (1⭐)<br/>
 
 </td><td width='50%' valign='top'>
 
+📝 **[cookbook-search](https://github.com/timescale/cookbook-search)** — 12 commits (1⭐)<br/>
 
 </td></tr></table>
 
