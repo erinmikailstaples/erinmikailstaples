@@ -43,7 +43,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 ## 📊 GitHub Activity
 
 **🚀 788 commits this year** *(+89 private)*
-- Random commit word: **"adjusting"** (used 2 times)
+- Random commit word: **"statuses"** (used 2 times)
 - Most commits in 1 minute: **5**
 - PRs merged: **98** (60.5% success rate)
 
