@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2026-09-01 07:51 UTC*
+*Last updated: 2026-09-01 10:44 UTC*
 
 - [Building Tutorial Tinder: from idea to deployed Replit demo](https://www.erinmikailstaples.com/building-tutorial-tinder-from-idea-to-deployed-replit-demo/) — Nov 14, 2025
 - [What building a Reactigotchi can teach you about an applications “memory”](https://www.erinmikailstaples.com/what-building-a-reactigotchi-can-teach-you-about-an-applications-memory/) — Nov 05, 2025
@@ -43,7 +43,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 ## 📊 GitHub Activity
 
 **🚀 814 commits this year** *(+105 private)*
-- Random commit word: **"credit"** (used 2 times)
+- Random commit word: **"allow"** (used 8 times)
 - Most commits in 1 minute: **5**
 - PRs merged: **98** (69.5% success rate)
 
