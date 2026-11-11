@@ -20,7 +20,7 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 
 <!-- DYNAMIC:START:blog -->
 ### Latest from my blog
-*Last updated: 2026-11-11 17:44 UTC*
+*Last updated: 2026-11-11 23:50 UTC*
 
 - [Building Tutorial Tinder: from idea to deployed Replit demo](https://www.erinmikailstaples.com/building-tutorial-tinder-from-idea-to-deployed-replit-demo/) — Nov 14, 2025
 - [What building a Reactigotchi can teach you about an applications “memory”](https://www.erinmikailstaples.com/what-building-a-reactigotchi-can-teach-you-about-an-applications-memory/) — Nov 05, 2025
@@ -42,19 +42,19 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <!-- DYNAMIC:START:stats -->
 ## 📊 GitHub Activity
 
-**🚀 960 commits this year** *(+278 private)*
-- Random commit word: **"exclude"** (used 2 times)
+**🚀 980 commits this year** *(+285 private)*
+- Random commit word: **"reddit"** (used 7 times)
 - Most commits in 1 minute: **5**
-- PRs merged: **96** (71.6% success rate)
+- PRs merged: **95** (67.4% success rate)
 
 ### 💻 Programming Languages
 ```
-📝 MDX        66% ║████████████████░░░░░░░░░║
-🌐 HTML       17% ║████░░░░░░░░░░░░░░░░░░░░░║
+📝 MDX        64% ║████████████████░░░░░░░░░║
+🌐 HTML       16% ║████░░░░░░░░░░░░░░░░░░░░░║
 🔷 TypeScript  5% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
 📄 Astro       4% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
 🐍 Python      4% ║█░░░░░░░░░░░░░░░░░░░░░░░░║
-🎨 CSS         2% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
+🎨 CSS         3% ║░░░░░░░░░░░░░░░░░░░░░░░░░║
 ```
 
 ### 📈 Active Repositories
@@ -63,10 +63,11 @@ You can learn more about me by visiting my site at <a href="https://erinmikailst
 <tr><td width='50%' valign='top'>
 
 🔥 **[Tiger-Data-Docs](https://github.com/timescale/Tiger-Data-Docs)** — 883 commits (4⭐)<br/>
+📝 **[cookbook-search](https://github.com/timescale/cookbook-search)** — 21 commits (3⭐)<br/>
 
 </td><td width='50%' valign='top'>
 
-📝 **[cookbook-search](https://github.com/timescale/cookbook-search)** — 21 commits (3⭐)<br/>
+📝 **[junk-journal](https://github.com/erinmikailstaples/junk-journal)** — 19 commits<br/>
 
 </td></tr></table>
 
